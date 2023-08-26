@@ -1,0 +1,3 @@
+My user name is: a2097855
+My home directory is: /home/a2097855
+I made this script on: isp02.tacc.utexas.edu
