@@ -4,7 +4,8 @@ UT EID: ars7724
 TACC username: a2097855
 */
 
-/* Purpose: Seperate an input vector of integers into two construct vectors: one with all the odd integers of the input vector and one with all the even integers of the input vector. 
+/*
+Purpose: Seperate an input vector of integers into two construct vectors: one with all the odd integers of the input vector and one with all the even integers of the input vector. 
 */
 
 //using standard input-output stream, vectors, and strings
@@ -19,7 +20,7 @@ using std::cin;// using standard character input
 
 // sorting function that creates two vectors (one with odd ints and the other with even ints) out of the input vector
 void oddEvenFunc(vector <int> &inputV) 
-// &inputV = passing the input numbers vector by reference. Allows original vector in the main code to remain unchanged; this is not a necessary step for this program.
+// &inputV = passing the input numbers vector by reference. Allows original vector in the main code to not remain unchanged (does not create a copy of the vector); this is not a necessary step for this program, since this function does not change the vector inputV.
 
 { //initializing vectors of integers for the odd numbers and for the even numbers
  vector<int>oddNum;
