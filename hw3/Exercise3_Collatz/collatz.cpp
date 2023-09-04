@@ -32,7 +32,7 @@ int cFunction(int n) // function takes in integer n, a starting number, and eval
  return sequenceL; // return the final sequence length for the particular starting number (which was the input) to the main function
 }
 
-void printList(vector<int> startingNums) // void function that prints the elements of vector startingNums with commas between values
+void printList(vector<int> startingNums) // void function that prints the elements of vector startingNums with commas between values, creates a copy of startingNums vector
 {
   for (int j = 0; j != startingNums.size(); j++) //j represents each starting number index; continue interation of the for loop for every index in the input vector. .size() gives the length of the input vector
  {
