@@ -38,6 +38,7 @@ void generateP(int e, int bound)
 {
   vector <int> primes;
   int currentNum = 2;
+  while (currentNum <=e)
     {
       if (isprime(currentNum))
 	{
@@ -56,7 +57,7 @@ int main()
   cout << "Enter a bound for the max value of an even number: ";
   cin >> bound;
   
-  for (int e = 4; e <= bound; e+2)
+  for (int e = 4; e <= bound; e+=2)
   {
     generateP(e, bound);
   }
