@@ -61,7 +61,7 @@ private:
 
 int main()
 {
-  int nprimes; // number of primes that will be outpu
+  int nprimes; // number of primes that will be output
   cout << "Enter how many primes required for output: ";
   cin >> nprimes;
   primegenerator sequence; // class primegenerator with object sequence (of primes)
