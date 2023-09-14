@@ -67,7 +67,7 @@ int main()
   primegenerator sequence; // class primegenerator with object sequence (of primes)
   while (sequence.number_of_primes_found()<nprimes) //within bounds of number of outputs
   {
-    int number = sequence.nextprime(); // find the next prime to outpu
+    int number = sequence.nextprime(); // find the next prime to output
     cout << "Number " << number << " is prime" << '\n';
   }
 }
