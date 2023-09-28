@@ -30,7 +30,7 @@ double newton_root(function <double(double)> f) { // takes function f as input
       root = root - froot / gradient; // update root using Newton method
     }
 
-  if (iterationNumber == maxIterations-1)
+  if (iterationNumber == maxIterations-1) //too many iterations, probably not going to converge
     {
       cout << "root did not converge quickly enough";
     }
@@ -39,10 +39,10 @@ double newton_root(function <double(double)> f) { // takes function f as input
 
 //initializes input integer, calls function to evaluate root, and outputs root
 int main(int argc, char* argv[]) {
-  if (argc == 1)
+  if (argc == 1) // only argument is calling the output file, no input for initialization
     {
-      cout << "did not input any arguments for integer value \n";
-      return 1; //error
+      cout << "did not input any arguments for integer value \n"; 
+      return 1; // error
     }
   float inputNum = atof(argv[1]); // input integer, to find the root of
   auto f = [inputNum] (double x) { return x * x - inputNum; }; // define function f(x) = x^2 - integer, captures integer
