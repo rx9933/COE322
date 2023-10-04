@@ -13,7 +13,7 @@ using std::ostream;
 #include <string>
 using std::string;
 
-// include formatting library for aligned grid, using fmt format and print functions
+// include formatting library for aligned grid, using fmt library format and print functions
 #include <fmt/format.h>
 using fmt::format,fmt::print;
 
@@ -27,7 +27,7 @@ int main()
 {
   for (int row = 0; row < 16; ++row) { // iterate over each row of grid
     for (int col = 0; col < 16; ++col) { // iterate over each column of grid
-      int number = row * 16 + col; // calculate number in base 10 based on position; row represents ones place * col represents tens place
+      int number = row * 16 + col; // calculate number in base 10 based on position; row represents ones place, col represents tens place
       string hex_number = to_hex(number); // convert base 10 number to hexadecimal number of type string
       print("{:<3}", hex_number); // number of spaces between the start of each hex number (includes length of each hex number = 2 + 1 space = 3)
     }
