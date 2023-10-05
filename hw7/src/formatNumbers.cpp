@@ -19,7 +19,6 @@ using fmt::format,fmt::print;
 // convert the input integer to a 2-digit hexadecimal string
 string to_hex(int number) {
   return format("{:02x}", number); // formats to 2 digit hexadecimal string. (x means hexadecimal)
-  //  return std::to_string(number);
 }
 
 // builds 16x16 grid of hex numbers 
