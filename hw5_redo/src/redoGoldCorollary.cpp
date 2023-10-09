@@ -5,7 +5,7 @@ UT EID: ars7724, hk24772
 TACC Username: a2097855, inb05141
 */
 
-// logic: for all primes, there exists two equidistant primes that sum to the original prime. This code checks for the prime numbers until 100. Adjust the variable maxR in the main class to check for more or less prime numbers.
+// logic: for all primes greater than 4, there exists two primes that average to the original prime. These 2 primes are equidistant from the original prim// This code checks for the prime numbers until 100. Adjust the variable maxR in the main class to check for more or less prime numbers.
 
 
 //using standard input-output stream
@@ -64,7 +64,7 @@ public:
   }
 };
 
-//terminology: r or r_currentPrime is the average of two primes q and p, where q-p = p-r; (q>r>p)
+//terminology: r or r_currentPrime is the average of two primes q and p, where r-q = p-r; (q>r>p)
 
 int main()
 {
