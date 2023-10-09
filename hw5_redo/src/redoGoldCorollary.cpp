@@ -64,7 +64,7 @@ public:
   }
 };
 
-//terminology: r or r_currentPrime is the average of two primes q and p, where r-q = p-r; (q>r>p)
+//terminology: r or r_currentPrime is the average of two primes q and p, where q-r = r-p; (q>r>p)
 
 int main()
 {
