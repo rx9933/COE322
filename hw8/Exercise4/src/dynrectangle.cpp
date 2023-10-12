@@ -53,7 +53,7 @@ c  float area() { return (bl->dx(*tr)) * (bl->dy(*tr));} // use pointers to find
 int main() {
 
   float scalefactor; //get a scale factor from user
-  cout << "Input a scaling factor for bottom rectangle top right point. Factor must be greater than or equal to 0 and less than or equal to 2 (current point is set at middle): ";
+  cout << "Input a scaling factor for bottom rectangle top right point: ";
   cin >> scalefactor;
 
   // main, initialize point objects
