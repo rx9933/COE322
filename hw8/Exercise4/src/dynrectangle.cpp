@@ -53,7 +53,7 @@ public:
 int main() {
 
   float scalefactor; //get a scale factor from user
-  cout << "Input a scaling factor for bottom rectangle top right point:";
+  cout << "Input a scaling factor for bottom rectangle top right point: ";
   cin >> scalefactor;
 
   // main, initialize point objects
