@@ -45,7 +45,7 @@ private:
 public:
   // initialize the Dynamic rectangle with the input pointer parameters (ibl, itr)
   DynRectangle(shared_ptr<Point> ibl, shared_ptr<Point> itr) : bl(ibl), tr(itr) {}
-  float area() { return (bl->dx(*tr)) * (bl->dy(*tr));} // use pointers to find the width and height of rectangle -> to find area
+c  float area() { return (bl->dx(*tr)) * (bl->dy(*tr));} // use pointers to find the width and height of rectangle -> to find area
   // *tr dereferences the shared pointer 
 };
 
@@ -53,7 +53,7 @@ public:
 int main() {
 
   float scalefactor; //get a scale factor from user
-  cout << "Input a scaling factor for bottom rectangle top right point: ";
+  cout << "Input a scaling factor for bottom rectangle top right point. Factor must be greater than or equal to 0 and less than or equal to 2 (current point is set at middle): ";
   cin >> scalefactor;
 
   // main, initialize point objects
