@@ -1,4 +1,4 @@
-l/****************************************************************
+/****************************************************************
  ****
  **** This file belongs with the course
  **** Introduction to Scientific Programming in C++/Fortran2003
@@ -58,12 +58,6 @@ public:
     return next!=nullptr; };
   void insert(int value);
   void print();
-  
-   // New public method to access `next`
-  shared_ptr<Node> get_next() {
-    return next;
-  }
-
 };
 
 int main() {
@@ -195,40 +189,67 @@ int List::length_iterative() {
 /*
  * Auxiliary functions
  */
+void Node::print() {
+  cout << datavalue << ":" << datacount;
+  if (has_next()) {
+    cout << ", "; next->print();
+  }
+};
+
+void List::print() {
+  cout << "List:";
+  if (head!=nullptr)
+    cout << " => "; head->print();
+  cout << '\n';
+};
+
+/*
+ * The homework stuff
+*/
 
 void List::insert(int value) {
-  if (head == nullptr) {
+  if (head == nullptr) // Empty list, making first node
+  {
     head = make_shared<Node>(value);
-  } else {
+  }
+  else // 
+  {
     shared_ptr<Node> current = head;
     shared_ptr<Node> previous = nullptr;
 
-    // Find the correct position to insert the new node
-    while (current && value >= current->value()) {
+    // locate position to insert new node
+    while (current && value >= current->value())
+    { 
       previous = current;
-      current = current->get_next();
+      current = current->nextnode();
     }
 
     // Create a new node
-    shared_ptr<Node> newNode = make_shared<Node>(value);
+    auto newNode = make_shared<Node>(value);
 
     if (!previous) {
       // Insert at the beginning
-      
+      newNode->nextnode() = head;
+      head = newNode;
+    }
+    else{
       // Insert in the middle or at the end
-      
+      newNode->nextnode() = previous->nextnode();
+      previous->nextnode() = newNode;
     }
   }
-}
+};
 
-bool List::contains_value( int value ) {
+
+bool List::contains_value(int value) {
   if (head==nullptr)
     return false; // no pointer, so no value
   else
     return head->contains_value(value); //evaluates recursively if value is in linked list, return boolean
 };
 
-bool Node::contains_value( int value) {
+bool Node::contains_value( int value) 
+{
   if (datavalue==value)
     {
     // if I contain this value, true
@@ -252,6 +273,13 @@ bool Node::contains_value( int value) {
 // C-v : one screen down
 // ESC v : one screen up
 
+
+/*
+ * The homework stuff
+ */
+
+/*
+
 void List::insert(int value) {
   if (head == nullptr) {
     head = std::make_shared<Node>(value);
@@ -260,21 +288,4 @@ void List::insert(int value) {
   }
 }
 
-void Node::print() {
-  cout << datavalue << ":" << datacount;
-  if (has_next()) {
-    cout << ", "; next->print();
-  }
-};
-
-void List::print() {
-  cout << "List:";
-  if (head!=nullptr)
-    cout << " => "; head->print();
-  cout << '\n';
-};
-
-/*
- * The homework stuff
- */
-
+*/
