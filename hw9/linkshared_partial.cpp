@@ -216,11 +216,16 @@ void List::insert( int value )
   else{
     shared_ptr<Node> currentNode = head; 
     shared_ptr<Node> previousNode = head;
-    while(currentNode->has_next() && (value > currentNode->value()  && value < currentNode->nextnode()->value()))
+    // while(currentNode->has_next() && (value > currentNode->value()  && value < currentNode->nextnode()->value()))
+    while (currentNode->has_next())
     {
+      if (value >= currentNode->nextnode()->value())
+      {
         previousNode = currentNode;
         currentNode = currentNode->nextnode();
-    }
+      }
+      else{break;}
+    } 
     if (currentNode == head) // beg 
     {
       auto newNode = make_shared<Node>(value, currentNode);
