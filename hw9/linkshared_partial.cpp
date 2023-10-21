@@ -39,13 +39,10 @@ public:
 
 class Node {
 private:
- 
-public:
-
   int datavalue{0},datacount{0};
   shared_ptr<Node> next{nullptr};
 
-
+public:
   Node() {};
   Node(int value,shared_ptr<Node> next=nullptr)
     : datavalue(value),datacount(1),next(next) {};
@@ -53,6 +50,7 @@ public:
     return datavalue; };
   auto nextnode() {
     return next; };
+  void setnextnode(shared_ptr<Node> newNode);
   int length();
   // This One Is New
   bool contains_value(int v);
@@ -217,10 +215,11 @@ void List::insert( int value )
   }
   else{
     shared_ptr<Node> currentNode = head; 
-    
-    while(currentNode->has_next() && value > currentNode->value())
+    shared_ptr<Node> previousNode = head;
+    while(currentNode->has_next() && (value > currentNode->value()  && value < currentNode->nextnode()->value()))
     {
-      currentNode = currentNode->nextnode();
+        previousNode = currentNode;
+        currentNode = currentNode->nextnode();
     }
     if (currentNode == head) // beg 
     {
@@ -229,17 +228,26 @@ void List::insert( int value )
       head = newNode;
     }
     else{ // middle or end
-      auto newNode = make_shared<Node>(value, currentNode->nextnode());
+      cout<<"inserting value" << value<<"\n";
+      cout<<"currentNode value" << currentNode->value()<<"\n";
+        cout<<"currentNode next value" << currentNode->nextnode()<<"\n";
+      auto newNode = make_shared<Node>(value, currentNode);
     //  cout<<"NewNode value" << newNode->value() <<"\n";
       // newNode->nextnode()=currentNode->nextnode() ;
-     // currentNode = make_shared<Node>(currentNode->value(), newNode);
-      currentNode->next = newNode;   
-    //   cout<<"currentNode value" << currentNode->value()<<"\n";
+      //currentNode = make_shared<Node>(currentNode->value(), newNode);
+     //currentNode->next = newNode; 
+     previousNode->setnextnode(newNode);
+
+   
+
        print(); 
     }
   }
-
 };
+void Node::setnextnode(shared_ptr<Node> newNode)
+{
+  next=newNode;
+}
 
 bool List::contains_value( int value ) {
   if (head==nullptr) 
