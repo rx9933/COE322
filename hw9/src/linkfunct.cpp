@@ -77,7 +77,6 @@ void List::insert( int value ) // insert value into list
   if (head==nullptr) // if empty list
   {
     head = make_shared<Node>(value, nullptr); // head points to inputted value
-    cout<< "data start 0 "<<head->count()<< " value " << value << "\n"; 
   }
   else // if non-empty list
   {
@@ -109,9 +108,9 @@ void List::insert( int value ) // insert value into list
         }
     }
   }
-  cout<< "data start "<<head->count()<< " value " << value << "\n"; 
   head->insert(value); 
 };
+
 
 void Node::insert(int value) // updating datacounts
 {
@@ -121,6 +120,7 @@ if (datavalue == value) // element is repeated
     {
     if(nextnode()->value() == datavalue) // check if next node has the same value
         {datacount ++;} // ... if so, update the datacount
+        
     nextnode()->insert(value);  //repeat loop for nextnode 
     }
   }
