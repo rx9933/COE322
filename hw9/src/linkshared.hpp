@@ -1,3 +1,10 @@
+/*
+Name: Arushi Sadam
+UT EID: ars7724
+TACC ID: a2097855
+*/
+// HEADER FILE
+
 // using standard input, output streams
 #include <iostream>
 using std::cin;
