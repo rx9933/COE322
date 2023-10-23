@@ -1,7 +1,13 @@
+
+/*
+Name: Arushi Sadam
+UT EID: ars7724
+TACC ID: a2097855
+*/
+// MAIN FILE
+
+//include access to header file, standard input output, use of pointer
 #include "linkshared.hpp"
-
-#include <cmath>
-
 #include <iostream>
 using std::cin;
 using std::cout;
@@ -10,12 +16,7 @@ using std::cout;
 using std::make_shared;
 using std::shared_ptr;
 
-#include <vector>
-using std::vector;
-
-#include <cassert>
-
-int main() {
+int main() { // inserts multiple elements and checks if values have been added, the lengths of the list after each addition, and other checks
 
   List mylist;
   cout << "Empty list has length: "
@@ -93,29 +94,29 @@ int main() {
 
   {
     cout << "Another check.\n";
-    List mylist;
-    for ( auto i : { 15,23,11,75,11,65,3} ) {
+    List mylist; // creates a new empty list
+    for ( auto i : { 15,23,11,75,11,65,3} ) { // loops through lists, and adds each element
       cout << "insert: " << i << '\n';
       mylist.insert(i);
     }
-    mylist.print();
+    mylist.print(); // outputs the list
   }
 
   {
-    cout << "Enter a list of input numbers: ";
-    int nextinput = -1; 
-    List mylist;
-    while(true)
+    cout << "Enter a list of input numbers: "; //adding this section; directs user on how to input numbers 
+    int nextinput; // initialize the input type
+    List mylist; // create new list
+    while(true) // until user enters 0
     {
-        cin>>nextinput; 
-        if(nextinput!=0)
+        cin>>nextinput;  // get the next input value
+        if(nextinput!=0) // if it is not 0
         {
-            mylist.insert(nextinput);
-            mylist.formattedPrint();
+            mylist.insert(nextinput); // add value
+            mylist.formattedPrint(); // output list in a formatted/specific manner
         }
-        else
+        else // input 0
         {
-            break; 
+            break; // exit loop
         }
     }
   }
