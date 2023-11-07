@@ -19,5 +19,5 @@
 #include <cmath>
 #include "tdd.hpp" // header file
 
-double f(int n) { return abs(n)+1; } // takes integer n as input, returns absolute value + 1 as a double
-// +1 ensures an input of 0 also results in a positive output
+double f(int n) { return double(abs(n)+1.1);} // returns the double of the absolute value of n + 1.1
+//+1.1 ensures an input of 0 also results in a positive output
