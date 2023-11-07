@@ -80,21 +80,21 @@ void move_bounds_closer( const polynomial& poly,double& left,double& right, bool
   double mid = (left + right) / 2; // midpoint x value
   double midval = poly.evaluate_at(mid); // polynomial value at midpoint
 
-  if (midval * leftval <= 0)
-    {
+  if (midval * leftval <= 0) // midval is positive
+    { //squeeze right bound in
       right = mid;
       rightval = midval;
     }
-  else
-    {
+  else // midval is negative
+    { // squeeze left bound in
       left = mid;
       leftval = midval;
     }
 }
-
+//finds the root/location for zero polynomial value
 double find_zero( const polynomial& poly,double prec,bool trace)
 {
-  if (!poly.is_odd())
+  if (!poly.is_odd()) //recheck that polynomial is even
     {
       throw std::invalid_argument("Even-degree polynomial not supported");
     }
@@ -102,14 +102,14 @@ double find_zero( const polynomial& poly,double prec,bool trace)
   double left = -10/* set initial left bound */;
   double right = 10/* set initial right bound */;
 
-  find_initial_bounds(poly, left, right);
-  while (abs(poly.evaluate_at((left + right) / 2)) >= prec)
+  find_initial_bounds(poly, left, right); // find the initial bound
+  //using the middle value between the bounds as the zero point
+  while (abs(poly.evaluate_at((left + right) / 2)) >= prec) // while the polynomial value is not within the range (+/- precision)
     {
-      move_bounds_closer(poly, left, right, trace);
-
+      move_bounds_closer(poly, left, right, trace); // squeeze the bound tighter
     }
 
-  // Calculate the zero once you've achieved the desired precision
+  // achieved the desired precision, find the xintercept/return intercept value
   double xintercept = (left + right) / 2;
   return xintercept;
 }
