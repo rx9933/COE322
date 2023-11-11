@@ -25,7 +25,7 @@ public:
   }
 };
 
-namespace geo {
+namespace geo { // create new namespace with same functionality as class namedvector
   template <typename T>
   class vector : public namedvector<T> { // inherits functions from class namedvector
   public:
