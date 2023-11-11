@@ -1,12 +1,12 @@
-cmake_minimum_required(VERSION 3.12)
-project(NamedVectorInheritance)
-
-set(CMAKE_CXX_STANDARD 14)
-
-# Set the installation directory
-set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/install)
-
+cmake_minimum_required( VERSION 3.12 )
+project(inheritanceClass VERSION 1.0)
 add_executable(inheritanceOut namedVector.cpp)
+install(TARGETS inheritanceOut DESTINATION . )
 
-# Install the executable to the specified directory
-install(TARGETS inheritanceOut DESTINATION ${CMAKE_INSTALL_PREFIX})
+
+
+
+
+
+
+
