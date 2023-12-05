@@ -26,7 +26,7 @@ using std::ofstream;
 static auto rng = std::default_random_engine {}; // used to generate random input addresses (for dynamicism) and set "primeness" for such addresses
 
 float fuelPrice = 1.0; // 1 dollar per mile, includes cost for gas + driver's wage per mile
-float driverBasePrice = .5; // minimum wage for employment
+float driverBasePrice = .5; // minimum wage for employment per distance traveled
 float primeTimeCost = 2; // dollars per mile driven before prime delivery
 float normalTimeCost = 1; //dollars per mile driven before regular delivery
 
@@ -340,25 +340,26 @@ public:
       addresses.insert(addresses.begin(), *(delivered.end()-1)); 
   }
 
-  float time() // used to calculate total time
+  float time() // used to calculate total time/wait cost per package 
   {
-    // prime/non-prime addresses yet to be visited
+    //number of prime/non-prime addresses visited
     vector<int>primes;
-    vector<int>nonPrimes; // leftover addresses
+    vector<int>nonPrimes; 
     int totPrime = 0;
     int totNonPrime = 0;
     for (int adr = 1; adr < this->size(); adr++) // per address
       {
         bool isPrime = this->addresses[this->size() - adr - 1].is_prime(); //ignore last depot
-        if (isPrime) { totPrime++; } // find prime, nonprime addresses
+        if (isPrime) { totPrime++; } // find total number of prime, nonprime addresses
         else { totNonPrime++; }
-        primes.push_back(totPrime);
-        nonPrimes.push_back(totNonPrime);
-      }
-    std::reverse(primes.begin(), primes.end()); 
+        primes.push_back(totPrime); // append the total number of primes already visited
+        nonPrimes.push_back(totNonPrime); // total number of primes not visited
+      } 
+    //each step the salesman takes without attending to the primes/non-prime addresses is related to the number of primes/non-primes left
+    std::reverse(primes.begin(), primes.end()); //at each index, number of prime addresses left
     std::reverse(nonPrimes.begin(), nonPrimes.end());
-    float custTimeCost = 0;
-    float step = 0.0;
+    float custTimeCost = 0; // total cost of delaying each package
+    float step = 0.0; // distance salesman travels
     for (int adr = 1; adr < this->size() - 1; adr++) // not counting depot / return time from last address
     {
         step = this->addresses[adr - 1].distance(this->addresses[adr]); // previous step matters to future + present customers
@@ -646,23 +647,25 @@ int main(){
 
   // ONE SALESMAN
 ///*
+  cout << "ONE SALESMAN" << endl << endl;
   cout << "Initial Route:\n";
   deliveries.print_addresses();
   cout << "Route Length: " << deliveries.length() << "\n";
   cout<< "Route Cost: " << Route::totalCost(deliveries)<<endl;
+  cout<<endl;
 //*/
 ///*
   Route greedy_route = deliveries.greedy_route();
   cout << "Greedy Route:\n"; 
   greedy_route.print_addresses();
-  cout << "Route Length: " << greedy_route.length() << "\n\n";
-  cout << "Route Cost: " << Route::totalCost(greedy_route) << "\n\n";
-
+  cout << "Route Length: " << greedy_route.length() << "\n";
+  cout << "Route Cost: " << Route::totalCost(greedy_route) << "\n";
+  cout<<endl;
 
   cout << "Opt2 Route \n";
   Route opt2Route = deliveries.opt2();
   opt2Route.print_addresses();
-  cout << "Route Length: " << opt2Route.length() << "\n\n";
+  cout << "Route Length: " << opt2Route.length() << "\n";
   cout << "Route Cost: " << Route::totalCost(opt2Route) << "\n\n";
 //*/
   /////*********TIME CHECKS *********////////
@@ -685,7 +688,7 @@ int main(){
   cout << "Greedy-Opt2 Route \n";
   Route greedyOpt2Route = greedy_route.opt2(); 
   greedyOpt2Route.print_addresses();
-  cout << "Route Length: " << greedyOpt2Route.length() << "\n\n";
+  cout << "Route Length: " << greedyOpt2Route.length() << "\n";
   cout << "Route Cost: " << Route::totalCost(greedyOpt2Route) << "\n\n";
 //  */
 
@@ -726,13 +729,11 @@ int main(){
   cout << "Opt2 Route 1:\n";
   opt2Route1.print_addresses();
   cout << "Optimized Combined Route Length: " << opt2Route1.length() << endl;
-  cout << "Optimized Combined Route Time: " << opt2Route1.time() << endl;
   cout << "Route Cost: " << Route::totalCost(opt2Route1) << endl;
   cout << endl;
   cout << "Opt2 Route 2:\n";
   opt2Route2.print_addresses();
   cout << "Optimized Combined Route Length: " << opt2Route2.length() << endl;
-  cout << "Optimized Combined Route Time: " << opt2Route2.time() << endl;
   cout << "Route Cost: " << Route::totalCost(opt2Route2) << endl;
   cout << endl;
 
@@ -743,15 +744,14 @@ int main(){
   Route greedyOpt2Route2  = std::get<1>(multiPathGreedOpt);
   //*/
 ///*
+  cout << endl;
   cout << "Greedy-opt2 Final Route 1:\n";
   greedyOpt2Route1.print_addresses();
   cout << "Greedy-opt2 Route Length 1: " << greedyOpt2Route1.length() << endl;
-  cout << "Greedy-opt2 Route Time 1: " << greedyOpt2Route1.time() << endl;
-  cout << "Greedy-opt2 Route Cost 1: " << Route::totalCost(greedyOpt2Route1) << endl;
-  cout << "Greedyopt2 Final Route 2:\n";
+  cout << "Greedy-opt2 Route Cost 1: " << Route::totalCost(greedyOpt2Route1) << endl << endl;
+  cout << "Greedy-opt2 Final Route 2:\n";
   greedyOpt2Route2.print_addresses();
   cout << "Greedy-opt2 Route Length 2: " << greedyOpt2Route2.length() << endl;
-  cout << "Greedy-opt2 Route Time 2: " << greedyOpt2Route2.time() << endl;
   cout << "Greedy-opt2 Route Cost 2: " << Route::totalCost(greedyOpt2Route2) << endl;
 //   auto end_time = std::chrono::high_resolution_clock::now();
 //   auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
@@ -797,7 +797,7 @@ int main(){
 
   cout << "\nFinal Delivered Address for Driver 1:";
   Address(0,0).print(); // returned to depot
-  cout << "\nFinal Delivered Address for Driver 2:"; 
+  cout << "\nFinal Delivered Address for Driver 2:"<<endl; 
   Address(0,0).print(); // returned to depot
 //   cout << endl<< "number of tot addresses" << randomAddressCounter<<endl;
 //   AddressList::printVector("dyn vector", AddressList::dyn); // all visited addresses
