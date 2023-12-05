@@ -1,7 +1,7 @@
 /*
     Name: Arushi Sadam & Nicole Olvera
     UT EID: ars7724 & no4342
-    TACC ID: rx9933 nicoleolv
+    TACC ID: rx9933 & nicoleolv
     
 */
 
